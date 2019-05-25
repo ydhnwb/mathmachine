@@ -11,7 +11,6 @@ import com.ydhnwb.mathmachine.fragments.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var fragment : Fragment
     companion object { var navStatus = -1 }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +29,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        var fragment : Fragment? = null
+
         when (item.itemId) {
             R.id.navigation_home -> {
                 if(navStatus != 0){
