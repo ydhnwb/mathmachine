@@ -9,7 +9,7 @@
         tools:context=".MainActivity">
 
     <FrameLayout
-            android:id="@+id/screen_container"
+            android:id="@+id/fragment_container"
             android:layout_marginBottom="56dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">

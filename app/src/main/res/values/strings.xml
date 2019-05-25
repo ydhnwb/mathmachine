@@ -4,4 +4,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_profile">Profile</string>
+    <string name="dummy">Lorem ipsum dolor sit amet consectuer. Lorem ipsum dolor sit amet consectuer. Lorem ipsum dolor
+        sit amet consectuer
+    </string>
 </resources>
