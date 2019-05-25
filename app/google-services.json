@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "202785787843",
+    "firebase_url": "https://mathmachine-d966e.firebaseio.com",
+    "project_id": "mathmachine-d966e",
+    "storage_bucket": "mathmachine-d966e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202785787843:android:74c80f4d48798abf",
+        "android_client_info": {
+          "package_name": "com.ydhnwb.mathmachine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202785787843-hqfd0qd6ih77eoiqgi6usr9fuh9b5lf7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyNj4PE_Q5AQyS0mDi-okm2kjD5JAfS08"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "202785787843-hqfd0qd6ih77eoiqgi6usr9fuh9b5lf7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
