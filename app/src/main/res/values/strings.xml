@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">mathmachine</string>
+    <string name="app_name">My app</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_notifications">Other</string>
     <string name="title_profile">Profile</string>
     <string name="dummy">Lorem ipsum dolor sit amet consectuer. Lorem ipsum dolor sit amet consectuer. Lorem ipsum dolor
         sit amet consectuer
     </string>
+    <string name="title_activity_lesson">LessonActivity</string>
 </resources>
