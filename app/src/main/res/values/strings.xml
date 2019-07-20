@@ -15,6 +15,6 @@
     <string name="title_materi">Materi</string>
     <string name="title_ujian">Ujian</string>
     <string name="title_profil">Profil</string>
-    <string name="title_activity_student">StudentActivity</string>
-    <string name="title_activity_student_flow">StudentFlowActivity</string>
+    <string name="title_activity_student">Daftar mahasiswa</string>
+    <string name="title_activity_student_flow">Buat atau edit</string>
 </resources>

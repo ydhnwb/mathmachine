@@ -1,40 +1,60 @@
 package com.ydhnwb.mathmachine
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.ydhnwb.mathmachine.adapters.StudentAdapter
+import com.ydhnwb.mathmachine.models.Student
 import com.ydhnwb.mathmachine.utils.Constants
 
 import kotlinx.android.synthetic.main.activity_student.*
+import kotlinx.android.synthetic.main.content_student.*
 
 class StudentActivity : AppCompatActivity() {
+
+    private var students = mutableListOf<Student>()
+    private val ref = FirebaseDatabase.getInstance().getReference(Constants.REF_STUDENTS)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student)
         setSupportActionBar(toolbar)
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
+        toolbar.setNavigationOnClickListener { finish() }
+        rv_student.apply {
+            layoutManager = LinearLayoutManager(this@StudentActivity)
+        }
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            startActivity(Intent(this@StudentActivity, StudentFlowActivity::class.java).apply {
+                putExtra("IS_NEW", true)
+            })
         }
     }
 
     private fun loadStudent(){
-        val ref = FirebaseDatabase.getInstance().getReference(Constants.REF_STUDENTS)
+        students.clear()
         ref.addListenerForSingleValueEvent(object : ValueEventListener{
-            override fun onCancelled(p0: DatabaseError) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
+            override fun onCancelled(p0: DatabaseError) {}
             override fun onDataChange(p0: DataSnapshot) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                if(p0.exists()){
+                    for (i in p0.children){
+                        students.add(i.getValue(Student::class.java)!!)
+                    }
+                }
+                rv_student.adapter = StudentAdapter(students, this@StudentActivity)
             }
-
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadStudent()
     }
 
 }

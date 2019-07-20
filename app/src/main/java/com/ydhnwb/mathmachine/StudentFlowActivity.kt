@@ -25,7 +25,7 @@ class StudentFlowActivity : AppCompatActivity() {
         doSave()
     }
 
-    private fun isNew() = intent.getBooleanExtra("ISNEW", true)
+    private fun isNew() = intent.getBooleanExtra("IS_NEW", true)
 
     private fun getCurrentStudent() = intent.getParcelableExtra<Student>("STUDENT")
 
@@ -71,5 +71,4 @@ class StudentFlowActivity : AppCompatActivity() {
             }
         }
     }
-
 }
