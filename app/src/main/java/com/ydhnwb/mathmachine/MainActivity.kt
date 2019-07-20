@@ -1,6 +1,7 @@
 package com.ydhnwb.mathmachine
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -13,10 +14,13 @@ import com.ydhnwb.mathmachine.fragments.OtherFragment
 import com.ydhnwb.mathmachine.fragments.ProfileFragment
 import android.os.Build
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 
 
 class MainActivity : AppCompatActivity() {
 
+    private var auth = FirebaseAuth.getInstance()
+    private var authListener : FirebaseAuth.AuthStateListener? = null
     companion object { var navStatus = -1 }
     private var fragment : Fragment? = null
 
@@ -38,7 +42,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        val i = item.itemId
         when(item.itemId){
             R.id.navigation_home -> {
                 if(navStatus != 0){
@@ -88,7 +91,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun isWriteStoragePermissionGranted(): Boolean {
         return if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) { true
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) { true
             } else {
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 2)
                 false
@@ -116,5 +119,36 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+
+    private fun authCheck(b : Boolean){
+        authListener = FirebaseAuth.AuthStateListener {
+            val u = it.currentUser
+            if(u == null){
+                val i = Intent(this@MainActivity, LoginActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+                startActivity(i)
+                finish()
+            }
+        }
+
+        if(b){
+            auth.addAuthStateListener(authListener!!)
+        }else{
+            auth.removeAuthStateListener(authListener!!)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        authCheck(true)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        authCheck(false)
     }
 }

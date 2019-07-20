@@ -8,4 +8,13 @@
         sit amet consectuer
     </string>
     <string name="title_activity_lesson">LessonActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_lecturer_login">LecturerLoginActivity</string>
+    <string name="title_activity_sub">Sub-bab</string>
+    <string name="title_latihan">Excercise</string>
+    <string name="title_materi">Materi</string>
+    <string name="title_ujian">Ujian</string>
+    <string name="title_profil">Profil</string>
+    <string name="title_activity_student">StudentActivity</string>
+    <string name="title_activity_student_flow">StudentFlowActivity</string>
 </resources>
