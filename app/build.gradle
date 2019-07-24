@@ -57,4 +57,7 @@ dependencies {
     //ui library
     implementation 'com.simplecityapps:recyclerview-fastscroll:2.0.0'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
+
+    implementation 'com.github.chrisbanes:PhotoView:2.1.4'
+
 }

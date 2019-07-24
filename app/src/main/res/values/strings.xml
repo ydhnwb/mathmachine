@@ -17,4 +17,6 @@
     <string name="title_profil">Profil</string>
     <string name="title_activity_student">Daftar mahasiswa</string>
     <string name="title_activity_student_flow">Buat atau edit</string>
+    <string name="title_activity_question">QuestionActivity</string>
+    <string name="title_activity_exam">ExamActivity</string>
 </resources>
