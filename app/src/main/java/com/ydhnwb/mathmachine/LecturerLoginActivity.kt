@@ -25,6 +25,7 @@ class LecturerLoginActivity : AppCompatActivity() {
         supportActionBar?.hide()
         doLogin()
         sharedPref = getSharedPreferences("USER", MODE_PRIVATE)
+        back.setOnClickListener { finish() }
     }
 
     private fun doLogin(){

@@ -4,8 +4,8 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Exam(var key : String?, var name : String?, var description : String?, var questions : List<Question>) : Parcelable {
-    constructor() : this(null, null, null,  mutableListOf())
+data class Exam(var key : String?, var name : String?, var description : String?, var questions : List<Question>, var status : Boolean) : Parcelable {
+    constructor() : this(null, null, null,  mutableListOf(), false)
 }
 
 

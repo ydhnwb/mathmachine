@@ -131,16 +131,57 @@ class ExamActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
         builder.setMessage("Jika anda keluar dari halaman ujian maka nilai anda dianggap 0. Apakah anda yakin ingin keluar?")
             .setPositiveButton("KELUAR"){dialog, which ->
-                super.onBackPressed()
-                finish()
-                //todo isi secore 0 dan percobaan ++
+                val ref = FirebaseDatabase.getInstance().getReference(Constants.REF_SCORE).child(getExamKey())
+                val key = getSharedPreferences("USER", Context.MODE_PRIVATE)!!.getString("USER_KEY","undefined")
+                if(!key.equals("undefined")){
+                    ref.child(key).addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onCancelled(p0: DatabaseError) {}
+                        override fun onDataChange(p0: DataSnapshot) {
+                            if(p0.exists()){
+                                val s = p0.getValue(Score::class.java)
+                                if(s != null){
+                                    val existScore = s.score
+                                    s.score = 0
+                                    if(s.life == 2){
+                                        s.life = 1
+                                    }else if(s.life == 1){
+                                        s.life = 0
+                                    }else{
+                                        s.life = 0
+                                    }
+                                    if(s.score > existScore){
+                                        p0.ref.setValue(s)
+                                        startActivity(Intent(this@ExamActivity, ScoreActivity::class.java).apply {
+                                            putExtra("SCORE", 0)
+                                            putExtra("EXIST_SCORE", s.score)
+                                            putExtra("LIFE", s.life!!)
+                                        }).also { finish() }
+                                    }else{
+                                        s.score = existScore
+                                        p0.ref.setValue(s)
+                                        startActivity(Intent(this@ExamActivity, ScoreActivity::class.java).apply {
+                                            putExtra("SCORE", 0)
+                                            putExtra("EXIST_SCORE", existScore)
+                                            putExtra("LIFE", s.life!!)
+                                        }).also { finish() }
+                                    }
+
+                                }
+                            }else{
+                                val score = Score(key, 0, 2)
+                                p0.ref.setValue(score)
+                                startActivity(Intent(this@ExamActivity, ScoreActivity::class.java).apply {
+                                    putExtra("SCORE", 0)
+                                    putExtra("EXIST_SCORE", score.score)
+                                    putExtra("LIFE", score.life!!)
+                                }).also { finish() }
+                            }
+                        }
+                    })
+                }
             }.setNegativeButton("BATAL"){dialog, which -> dialog.cancel()  }
         val alert = builder.create()
         alert.show()
     }
 
-    private fun submitScore(){
-
-
-    }
 }

@@ -8,6 +8,7 @@ class Constants {
         const val REF_LECTURERS = "LECTURERS"
         const val REF_SOAL_STORAGE = "SOAL"
         const val REF_SCORE = "SCORE"
+        const val REF_SWITCH = "SWITCH"
 
     }
 }

@@ -1,5 +1,6 @@
 package com.ydhnwb.mathmachine.fragments
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
@@ -13,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.ydhnwb.mathmachine.ManageQuestionActivity
 import com.ydhnwb.mathmachine.R
+import com.ydhnwb.mathmachine.SeeScoreActivity
 import com.ydhnwb.mathmachine.StudentActivity
 import com.ydhnwb.mathmachine.models.Lecturer
 import com.ydhnwb.mathmachine.models.Student
@@ -33,15 +35,21 @@ class ProfileFragment : Fragment() {
                 ref = FirebaseDatabase.getInstance().getReference(Constants.REF_LECTURERS).child(key)
                 manage_students.visibility = View.VISIBLE
                 manage_exam.visibility = View.VISIBLE
+                manage_score.visibility = View.VISIBLE
                 manage_exam.setOnClickListener {
                     startActivity(Intent(activity, ManageQuestionActivity::class.java))
                 }
                 manage_students.setOnClickListener {
                     startActivity(Intent(activity, StudentActivity::class.java))
                 }
+
+                manage_score.setOnClickListener {
+                    startActivity(Intent(activity, SeeScoreActivity::class.java))
+                }
             }else{
                 manage_exam.visibility = View.GONE
                 manage_students.visibility = View.GONE
+                manage_score.visibility = View.GONE
                 ref = FirebaseDatabase.getInstance().getReference(Constants.REF_STUDENTS).child(key)
             }
 

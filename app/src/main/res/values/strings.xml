@@ -19,13 +19,15 @@
     <string name="title_activity_student_flow">Buat atau edit</string>
     <string name="title_activity_question">QuestionActivity</string>
     <string name="title_activity_exam">ExamActivity</string>
-    <string name="title_activity_manage_question">ManageQuestionActivity</string>
-    <string name="title_activity_detail_manage">DetailManageActivity</string>
-    <string name="title_activity_question_flow">QuestionFlowActivity</string>
+    <string name="title_activity_manage_question">Kelola soal</string>
+    <string name="title_activity_detail_manage">Pilih soal</string>
+    <string name="title_activity_question_flow">Edit soal</string>
     <string-array name="answers">
         <item>A</item>
         <item>B</item>
         <item>C</item>
         <item>D</item>
     </string-array>
+    <string name="title_activity_see_score">Pilih ujian</string>
+    <string name="title_activity_detail_see_score">Nilai mahasiswa</string>
 </resources>
