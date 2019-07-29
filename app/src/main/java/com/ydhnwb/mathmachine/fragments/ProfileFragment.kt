@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.ydhnwb.mathmachine.ManageQuestionActivity
 import com.ydhnwb.mathmachine.R
 import com.ydhnwb.mathmachine.StudentActivity
 import com.ydhnwb.mathmachine.models.Lecturer
@@ -31,10 +32,15 @@ class ProfileFragment : Fragment() {
             if(activity?.getSharedPreferences("USER", Context.MODE_PRIVATE)!!.getBoolean("IS_LECTURER", true)){
                 ref = FirebaseDatabase.getInstance().getReference(Constants.REF_LECTURERS).child(key)
                 manage_students.visibility = View.VISIBLE
+                manage_exam.visibility = View.VISIBLE
+                manage_exam.setOnClickListener {
+                    startActivity(Intent(activity, ManageQuestionActivity::class.java))
+                }
                 manage_students.setOnClickListener {
                     startActivity(Intent(activity, StudentActivity::class.java))
                 }
             }else{
+                manage_exam.visibility = View.GONE
                 manage_students.visibility = View.GONE
                 ref = FirebaseDatabase.getInstance().getReference(Constants.REF_STUDENTS).child(key)
             }

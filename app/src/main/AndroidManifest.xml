@@ -13,6 +13,23 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity
+                android:name=".QuestionFlowActivity"
+                android:label="@string/title_activity_question_flow"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name=".DetailManageActivity"
+                android:label="@string/title_activity_detail_manage"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name=".ManageQuestionActivity"
+                android:label="@string/title_activity_manage_question"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".ScoreActivity">
+        </activity>
         <activity android:name=".ViewPhotoActivity">
         </activity>
         <activity

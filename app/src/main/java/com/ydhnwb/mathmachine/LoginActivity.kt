@@ -42,7 +42,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
         if(b){
-            Toast.makeText(this@LoginActivity, "User is logged in", Toast.LENGTH_LONG).show()
             auth.addAuthStateListener(authListener!!)
         }else{
             auth.removeAuthStateListener(authListener!!)

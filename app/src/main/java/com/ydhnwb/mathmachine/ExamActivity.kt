@@ -1,7 +1,10 @@
 package com.ydhnwb.mathmachine
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.ydhnwb.mathmachine.adapters.QuestionAdapter
 import com.ydhnwb.mathmachine.models.Question
+import com.ydhnwb.mathmachine.models.Score
 import com.ydhnwb.mathmachine.utils.Constants
 
 import kotlinx.android.synthetic.main.activity_exam.*
@@ -21,7 +25,7 @@ class ExamActivity : AppCompatActivity() {
 
     private var questions = mutableListOf<Question>()
     companion object {
-        public var answers = mutableMapOf<Question, String>()
+        public var answers = mutableMapOf<String, String>()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,10 +36,74 @@ class ExamActivity : AppCompatActivity() {
         rv_examination.layoutManager = LinearLayoutManager(this@ExamActivity)
         loadData()
         btn_submit.setOnClickListener {
-            for(s in answers){
-                println("uwu "+s.value)
+            if(answers.size < questions.size){
+                val builder = AlertDialog.Builder(this)
+                builder.setMessage("Jawab semua pertanyaan terlebih dahulu").setCancelable(false)
+                    .setPositiveButton("PAHAM"){dialog, which ->
+                        dialog.cancel()
+                    }
+                val alertt = builder.create()
+                alertt.show()
+            }else{
+                var i = 0
+                for(d in questions){
+                    val correctAns = d.answer.toString()
+                    val answer = answers.get(d.key).toString()
+                    if(correctAns.equals(answer)){
+                        i += 1
+                    }
+                }
+                val ref = FirebaseDatabase.getInstance().getReference(Constants.REF_SCORE).child(getExamKey())
+                val key = getSharedPreferences("USER", Context.MODE_PRIVATE)!!.getString("USER_KEY","undefined")
+                if(!key.equals("undefined")){
+                    ref.child(key).addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onCancelled(p0: DatabaseError) {}
+
+                        override fun onDataChange(p0: DataSnapshot) {
+                            if(p0.exists()){
+                                val s = p0.getValue(Score::class.java)
+                                if(s != null){
+                                    val existScore = s.score
+                                    s.score = i*10
+                                    if(s.life == 2){
+                                        s.life = 1
+                                    }else if(s.life == 1){
+                                        s.life = 0
+                                    }else{
+                                        s.life = 0
+                                    }
+                                    if(s.score > existScore){
+                                        p0.ref.setValue(s)
+                                        startActivity(Intent(this@ExamActivity, ScoreActivity::class.java).apply {
+                                            putExtra("SCORE", i*10)
+                                            putExtra("EXIST_SCORE", s.score)
+                                            putExtra("LIFE", s.life!!)
+                                        }).also { finish() }
+                                    }else{
+                                        s.score = existScore
+                                        p0.ref.setValue(s)
+                                        startActivity(Intent(this@ExamActivity, ScoreActivity::class.java).apply {
+                                            putExtra("SCORE", i*10)
+                                            putExtra("EXIST_SCORE", existScore)
+                                            putExtra("LIFE", s.life!!)
+                                        }).also { finish() }
+                                    }
+
+                                }
+                            }else{
+                                val score = Score(key, i*10, 2)
+                                p0.ref.setValue(score)
+                                startActivity(Intent(this@ExamActivity, ScoreActivity::class.java).apply {
+                                    putExtra("SCORE", i*10)
+                                    putExtra("EXIST_SCORE", score.score)
+                                    putExtra("LIFE", score.life!!)
+                                }).also { finish() }
+                            }
+                        }
+                    })
+                }
+
             }
-            Toast.makeText(this, answers.size.toString(), Toast.LENGTH_LONG).show()
         }
     }
 
@@ -57,5 +125,22 @@ class ExamActivity : AppCompatActivity() {
                 rv_examination.adapter = QuestionAdapter(questions, this@ExamActivity)
             }
         })
+    }
+
+    override fun onBackPressed() {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Jika anda keluar dari halaman ujian maka nilai anda dianggap 0. Apakah anda yakin ingin keluar?")
+            .setPositiveButton("KELUAR"){dialog, which ->
+                super.onBackPressed()
+                finish()
+                //todo isi secore 0 dan percobaan ++
+            }.setNegativeButton("BATAL"){dialog, which -> dialog.cancel()  }
+        val alert = builder.create()
+        alert.show()
+    }
+
+    private fun submitScore(){
+
+
     }
 }

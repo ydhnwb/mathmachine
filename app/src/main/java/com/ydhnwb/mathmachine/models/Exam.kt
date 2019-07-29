@@ -10,6 +10,11 @@ data class Exam(var key : String?, var name : String?, var description : String?
 
 
 @Parcelize
-data class Question (var key : String?, var answer : String?, var image : String?, var description: String?) : Parcelable {
-    constructor() : this(null, null, null, null)
+data class Question (var key : String?, var answer : String?, var image : String?, var description: String?, var choosedAnswer : String?) : Parcelable {
+    constructor() : this(null, null, null, null, null)
+}
+
+@Parcelize
+data class Score (var key: String?, var score : Int, var life : Int?) : Parcelable{
+    constructor() : this(null, 0, 0)
 }

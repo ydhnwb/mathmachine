@@ -19,4 +19,13 @@
     <string name="title_activity_student_flow">Buat atau edit</string>
     <string name="title_activity_question">QuestionActivity</string>
     <string name="title_activity_exam">ExamActivity</string>
+    <string name="title_activity_manage_question">ManageQuestionActivity</string>
+    <string name="title_activity_detail_manage">DetailManageActivity</string>
+    <string name="title_activity_question_flow">QuestionFlowActivity</string>
+    <string-array name="answers">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+    </string-array>
 </resources>

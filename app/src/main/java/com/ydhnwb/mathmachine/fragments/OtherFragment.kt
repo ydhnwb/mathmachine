@@ -15,12 +15,15 @@ import com.ydhnwb.mathmachine.adapters.ExamAdapter
 import com.ydhnwb.mathmachine.models.Exam
 import com.ydhnwb.mathmachine.utils.Constants
 import kotlinx.android.synthetic.main.fragment_other.view.*
+import android.content.Context.MODE_PRIVATE
+
 
 class OtherFragment : Fragment() {
     private var ref = FirebaseDatabase.getInstance().getReference(Constants.REF_EXAM)
     private var exams = mutableListOf<Exam>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = inflater.inflate(R.layout.fragment_other, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = inflater.inflate(
+        R.layout.fragment_other, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,6 +35,7 @@ class OtherFragment : Fragment() {
 
     private fun loadData(){
         exams.clear()
+        val isLecturer = activity!!.getSharedPreferences("USER", MODE_PRIVATE).getBoolean("IS_LECTURER", true)
         ref.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {}
             override fun onDataChange(p0: DataSnapshot) {
@@ -40,7 +44,7 @@ class OtherFragment : Fragment() {
                         exams.add(i.getValue(Exam::class.java)!!)
                     }
                 }
-                view?.rv_exam?.adapter = ExamAdapter(exams, activity!!)
+                view?.rv_exam?.adapter = ExamAdapter(exams, activity!!, isLecturer)
             }
         })
     }

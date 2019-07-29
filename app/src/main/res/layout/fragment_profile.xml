@@ -46,6 +46,23 @@
             <LinearLayout
                     android:background="?attr/selectableItemBackground"
                     android:visibility="gone"
+                    android:id="@+id/manage_exam"
+                    android:padding="16dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:textSize="18sp"
+                        android:text="Kelola soal ujian"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:background="?attr/selectableItemBackground"
+                    android:visibility="gone"
                     android:id="@+id/manage_students"
                     android:padding="16dp"
                     android:orientation="vertical"
