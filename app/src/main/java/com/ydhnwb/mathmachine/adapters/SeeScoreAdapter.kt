@@ -28,6 +28,7 @@ class SeeScoreAdapter (var exams : List<Exam>, var context : Context) : Recycler
                     putExtra("EXAM_KEY", exam.key)
                 })
             }
+            itemView.list_desc.text = "Cek nilai ${exam.name}"
         }
     }
 }

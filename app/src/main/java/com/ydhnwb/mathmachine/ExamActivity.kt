@@ -122,6 +122,7 @@ class ExamActivity : AppCompatActivity() {
                         questions.add(i.getValue(Question::class.java)!!)
                     }
                 }
+                questions.shuffle()
                 rv_examination.adapter = QuestionAdapter(questions, this@ExamActivity)
             }
         })

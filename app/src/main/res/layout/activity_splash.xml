@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="match_parent"
+        tools:context=".SplashActivity">
+
+    <ImageView
+            android:layout_centerInParent="true"
+            android:id="@+id/etc_im"
+            android:src="@drawable/plotek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    <TextView
+            android:layout_below="@id/etc_im"
+            android:layout_centerInParent="true"
+            android:id="@+id/etc_name"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:textAlignment="center"
+            android:text="Aplikasi Pembelajaran\nMatematika Terapan 2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <ProgressBar
+            android:layout_marginTop="36dp"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/etc_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    <LinearLayout
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <TextView
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:id="@+id/etc_2"
+                android:text="M. Taufik Qurohman, M.Pd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:id="@+id/etc_1"
+                android:text="Taufiq Abidin, S.Pd, M.Kom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        <TextView
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:id="@+id/etc_3"
+                android:text="Muchamad Sobri Sungkar, M.Kom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</RelativeLayout>
